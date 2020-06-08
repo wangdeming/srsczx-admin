@@ -1,0 +1,128 @@
+.wrapper-content{
+    height: 99%;
+}
+.ibox,.ibox-content{
+    height: auto;
+}
+.row{
+    margin-bottom: 20px;
+}
+.form-control[disabled]{
+    background-color: #fff;
+    border: 0;
+    padding: 0;
+}
+.btn-group-m-t {
+    margin-top: 60px;
+}
+.btn-group-m-t .btn{
+    margin-right:20px;
+    padding: 8px 32px;
+}
+.form-control{
+    background: #F4F4F4;
+    border-radius: 4px!important;
+}
+.ibox-title{
+    color: #999;
+}
+.ibox-title a{
+    color: #999;
+}
+.ibox-title a:hover{
+    color: #19B467;
+}
+.ibox-title span{
+    color: #19B467;
+}
+.div-input{
+    height: 400px;
+    position: relative;
+    width: 720px;
+}
+.div-input .div-p{
+    margin-top: 150px;
+    text-align: center;
+}
+.div-input img{
+    margin-bottom: 12px;
+}
+.div-input p{
+    font-size: 14px;
+    color: #999999;
+    line-height: 20px;
+    margin: 0;
+}
+.div-input input{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: block;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+.div-input-sm{
+    width: 200px;
+    height: 140px;
+}
+.div-input-sm .div-p{
+    margin-top: 20px;
+}
+.div-img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.div-img img{
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+.div-img button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    cursor: pointer;
+    border: 0;
+    font-size: 24px;
+    color: #333;
+    outline: none;
+    z-index: 3;
+}
+.append_img{
+    overflow: hidden;
+    width: 720px;
+    margin-bottom: 20px;
+}
+.append_img .div-img{
+    width: 200px;
+    height: 140px;
+    float: left;
+    position: relative;
+    padding: 0;
+}
+.append_img .div-textarea {
+    float: left;
+    width: 500px;
+    margin-left: 20px;
+    position: relative;
+}
+.append_img .div-textarea textarea{
+    resize: none;
+}
+.append_img .div-textarea span.num {
+    position: absolute;
+    right: 13px;
+    bottom: 7px;
+}
+.append_img .div-textarea span.num i {
+    font-style: normal;
+}
+.myContent .layui-layer-content{
+    padding: 10px 30px;
+}

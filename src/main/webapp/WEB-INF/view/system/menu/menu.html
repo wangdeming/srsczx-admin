@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>菜单管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                                <div class="col-sm-5">
+                                    <button class="btn btn-info" onclick="Menu.openAddMenu()" type="button">添加</button>
+                                    <button class="btn btn-info button-margin" onclick="Menu.openChangeMenu()" type="button">修改</button>
+                                    <button class="btn btn-info button-margin" onclick="Menu.delMenu()" type="button">删除</button>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div style="float: right;">
+                                        <button class="btn btn-primary " id="" onclick="Menu.search()" type="button">
+                                            <i class="fa fa-search"></i>&nbsp;搜索
+                                        </button>
+                                    </div>
+                                    <div class="form-inline" style="float: right;margin-right: 76px;">
+                                        <input class="form-control" id="keyword" placeholder="输入角菜单名称进行搜索" style="width: 130%;" type="text"/>
+                                    </div>
+                                </div>
+                            </div>
+                        <#table id="menuTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/menu/menu.js"></script>
+@}

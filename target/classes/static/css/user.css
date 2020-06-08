@@ -1,0 +1,140 @@
+.row{
+    margin-bottom: 20px;
+}
+.spacing{
+    padding: 0px 0 0 27px;
+}
+.mlr_8 {
+    margin: 30px 8px;
+}
+.prl_0 {
+    padding:  0;
+}
+.user_edit{
+    font-size: 20px;
+    margin: 0px 10px;
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.user—con{
+    padding: 10px 0;
+}
+.mco{
+    color: #00ce68;
+}
+.pcx{
+    font-size: 15px;
+    margin: 20px 0;
+    text-decoration: underline;
+}
+.x-file-input span{
+    position: absolute;
+    right: 32px;
+}
+.x-file-input input {
+    position: inherit;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    left: 0;
+    top: 0px;
+    bottom: 0;
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    height: 60px;
+}
+.mlr_8{
+    margin: 30px 8px;
+}
+.prl_0{
+    padding:  0;
+}
+
+.conter{
+    line-height: 27px;
+}
+.control-label{
+    /*text-align: center !important;*/
+    /*color: #676a6c;*/
+    /*font-size: 15px;*/
+    font-weight: inherit;
+}
+.has-error .form-control {
+    border-color: #ccc;
+}
+.has-error .control-label {
+    color: #4E5558;
+}
+.user—con{
+    padding: 10px 0;
+}
+.user_title{
+    color: #676a6c;
+    font-size: 15px;
+    text-align: right;
+}
+.conter{
+    line-height: 27px;
+}
+
+
+.mlr_8{
+    margin: 30px 8px;
+}
+.user—con{
+    padding: 10px 0;
+}
+.user_title{
+    color: #676a6c;
+    font-size: 15px;
+    text-align: right;
+}
+.btn-c{
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: #FFFFFF;
+    border-radius: 4px;
+    padding: 3px 14px;
+}
+.btn-c:hover{
+    color: #FFFFFF;
+}
+.Open{
+    display:none;
+}
+.z_edit{
+    margin: 0 5px;
+    font-size: 16px;
+    position: relative;
+    top: -2px;
+
+}
+table{
+    text-align: center;
+}
+table tr{
+    border: 1px solid #ccc;
+}
+table th{
+    border-right: 1px solid #ccc;
+    padding: 16px 30px;
+    text-align: center;
+}
+table td{
+    border-right: 1px solid #ccc;
+    padding: 10px 40px;
+}
+.ibox-title{
+    color: #999;
+}
+.ibox-title a{
+    color: #999;
+}
+.ibox-title a:hover{
+    color: #19B467;
+}
+.ibox-title span{
+    color: #19B467;
+}

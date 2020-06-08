@@ -1,0 +1,15 @@
+package ${dao.packageName};
+
+/**
+ * @Description ${context.bizChName}Dao
+ * @Version V1.0
+ * @CreateDate ${date.currentDateTime()}
+ *
+ * Date           Author               Description
+ * ------------------------------------------------------
+ * ${date.currentDate()}      xxx            类说明
+ */
+public interface ${context.bizEnBigName}Dao {
+
+
+}

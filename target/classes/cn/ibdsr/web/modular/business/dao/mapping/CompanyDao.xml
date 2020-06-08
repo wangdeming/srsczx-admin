@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ibdsr.web.modular.business.dao.CompanyDao">
+
+    <select id="list" resultType="java.util.Map">
+        SELECT
+        t.id,
+        t.`name`,
+        IFNULL(DATE_FORMAT(t.set_time,'%Y'),'未成立') setTime,
+        t.emp_num empNum,
+        t.core_business coreBusiness,
+        t.contact_name contactName,
+        t.contact_phone contactPhone,
+        t.email,
+        DATE_FORMAT(
+        t.created_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) createdTime,
+        t.is_read isRead
+        FROM
+        company t
+        WHERE
+        t.is_deleted = 0
+        <if test="isRead != null">
+            and t.is_read = #{isRead}
+        </if>
+        <choose>
+            <when test="orderField != null and orderField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        <if test="orderField == 'createdTime'">
+                            order by t.created_time ASC
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test="orderField == 'createdTime'">
+                            order by t.created_time DESC
+                        </if>
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by t.created_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getExportList" resultType="cn.ibdsr.web.modular.business.transfer.CompanyPoiVo">
+        SELECT
+        @rank :=@rank + 1 AS num,
+        a.*
+        FROM
+        (
+        SELECT
+        t.name,
+        IFNULL(DATE_FORMAT(t.set_time,'%Y'),'未成立') setTime,
+        t.emp_num empNum,
+        t.core_business coreBusiness,
+        t.contact_name contactName,
+        t.contact_phone contactPhone,
+        t.email,
+        t.remark,
+        DATE_FORMAT(
+        t.created_time,
+        '%Y-%m-%d %H:%i:%s'
+        ) createdTime,
+                t.is_read isRead
+            FROM
+                company t
+            WHERE
+                t.id in
+            <foreach collection="companyIds" open="(" separator="," close=")" index="index" item="item">
+                #{item}
+            </foreach>
+            order by t.created_time DESC
+        ) a,
+        (SELECT @rank := 0) b
+    </select>
+</mapper>

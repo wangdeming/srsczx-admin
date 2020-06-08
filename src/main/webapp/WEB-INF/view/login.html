@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>上饶市创新创业产业孵化中心后台管理系统 - 登录</title>
+    <link href="${ctxPath}/static/favicon.ico" rel="shortcut icon">
+    <link href="${ctxPath}/static/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctxPath}/static/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctxPath}/static/css/animate.css" rel="stylesheet">
+    <link href="${ctxPath}/static/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="${ctxPath}/static/css/newStyle.css?v=1.0.0" rel="stylesheet">
+    <link href="${ctxPath}/static/css/login-one.css" rel="stylesheet">
+    <script>if (window.top !== window.self) {
+        window.top.location = window.location;
+    }</script>
+    <script src="${ctxPath}/static/js/jquery.min.js?v=2.1.4"></script>
+    <script src="${ctxPath}/static/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="${ctxPath}/static/js/common/Feng.js"></script>
+    <script src="${ctxPath}/static/js/plugins/layer/layer.min.js"></script>
+    <script type="text/javascript">
+        Feng.addCtx("${ctxPath}");
+        Feng.sessionTimeoutRegistry();
+    </script>
+</head>
+<style>
+    .login-box {
+        width: 410px;
+    }
+</style>
+<body class="gray-bg">
+
+<div class="login-box">
+    <h3 class="login-title firstlogin ">欢迎使用上饶市创新创业产业孵化中心后台管理系统</h3>
+    <h3 class="login-title firstloginxp hide">温馨提示：您当前使用的是初始默认密码，为保障账户安全，请尽快修改密码。</h3>
+    <br/>
+    <h4 style="color: red;">${tips!}</h4>
+    <!--    <div id="formBox-account" class="">-->
+    <form action="${ctxPath}/login" class="m-t" method="post" role="form">
+        <div class="form-group">
+            <input class="form-control" id="username" name="username" placeholder="用户名" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" id="password" name="password" placeholder="密码" type="password">
+        </div>
+        @if(kaptcha.getKaptchaOnOff() == true){
+        <div class="form-group" style="float: left;">
+            <div class="col-sm-8" style="padding-left: 0px; padding-right: 0px;">
+                <input class="form-control" name="kaptcha" placeholder="验证码" required="" type="text">
+            </div>
+            <div class="col-sm-4" style="padding-left: 0px; padding-right: 0px;">
+                <img height="100%" id="kaptcha" src="${ctxPath}/kaptcha" width="100%"/>
+            </div>
+        </div>
+        @}
+        <div class="form-group" style="float: left;">
+            <div class="checkbox" style="text-align: left">
+                <label>
+                    <input id="remember" name="remember" style="margin-top: 2px;" type="checkbox">记住我
+                </label>
+            </div>
+        </div>
+        <button class="btn btn-primary block full-width m-b" type="submit">登 录</button>
+        <!--         <button type="submit" class="btn btn-primary block full-width m-b" id="accountLogin">登 录</button>-->
+
+    </form>
+    <div class="login-list hide" id="formBox-security">
+        <div class="login-input" style=" margin-bottom: 40px;">
+            <span>   新   密   码   </span>
+            <input id="newPwd" placeholder="请输入新密码" type="password">
+        </div>
+        <div class="login-input">
+            <span>确认密码</span>
+            <input id="rePwd" placeholder="请重新输入新密码" type="password">
+        </div>
+        <div>
+            <button class="login-btn" id="verifCodeLogin">下一步</button>
+            <p class="Namend">
+                暂不修改
+            </p>
+        </div>
+    </div>
+</div>
+<div class="slideshow">
+    <div class="slideshow-image bg1"></div>
+    <div class="slideshow-image bg2"></div>
+    <div class="slideshow-image bg3"></div>
+    <div class="slideshow-image bg4"></div>
+</div>
+<script>
+    $(function () {
+        $("#kaptcha").on('click', function () {
+            $("#kaptcha").attr('src', '${ctxPath}/kaptcha?' + Math.floor(Math.random() * 100)).fadeIn();
+        });
+        fobidden_back();
+    });
+
+    //禁用浏览器返回
+    function fobidden_back() {
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', back_common)
+    }
+
+    function back_common() {
+        history.pushState(null, null, document.URL);
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ibdsr.web.modular.system.dao.RoleDao">
+
+	<resultMap id="RoleResultMap" type="cn.ibdsr.web.common.persistence.model.Role">
+		<id column="id" property="id" />
+		<result column="num" property="num" />
+		<result column="pid" property="pid" />
+		<result column="name" property="name" />
+		<result column="tips" property="tips" />
+		<result column="status" property="status" />
+		<result column="version" property="version" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, num, pid, name, tips, status, version
+	</sql>
+
+	<delete id="deleteRolesById">
+		delete from relation where roleid = #{roleId}
+	</delete>
+
+	<select id="listRolesByUserId" resultMap="RoleResultMap">
+		SELECT
+			r.*
+		FROM
+			role_user rur,
+			role r
+		WHERE
+			rur.role_id = r.id
+		AND rur.user_id = #{userId}
+	</select>
+
+	<select id="list" resultType="java.util.Map">
+		SELECT
+			t.id, t.name, t.tips, t.status, count(ru.user_id) userCount, u.account userName
+		FROM
+			role t
+		LEFT JOIN role_user ru ON t.id = ru.role_id
+		LEFT JOIN user u ON t.name = u.account
+		<if test="keyword != null and keyword != ''">
+			where
+				t.name like CONCAT('%',#{keyword},'%')
+		</if>
+		GROUP BY
+			t.id
+	</select>
+
+	<insert id="setAuthorityBatch">
+		insert into relation (menuid, roleid)
+		value
+		<foreach collection="menuIds" item="item" index="index" separator=",">
+			(#{item}, #{roleId})
+		</foreach>
+	</insert>
+</mapper>

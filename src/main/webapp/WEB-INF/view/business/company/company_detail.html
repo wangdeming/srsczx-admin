@@ -1,0 +1,73 @@
+@layout("/common/_container.html"){
+<style>
+    p{
+        display: inline-block;
+        padding-top: 7px;
+    }
+</style>
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input id="id" type="hidden" value="${id}">
+
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*企业名称：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="name"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*成立时间：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="setTime"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*企业人数：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="empNum"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*主营业务：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="coreBusiness"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*联系人姓名：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="contactName"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*联系电话：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="contactPhone"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">*电子邮箱：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="email"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 col-xs-2 control-label" style="text-align: left;padding-top: 7px;margin-left: 50px;">备注信息：</label>
+                <div class="col-sm-6 col-xs-8">
+                    <p id="remark"></p>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12">
+                    <label class="col-sm-2 col-xs-2 control-label" style="text-align: right;padding-top: 7px;margin-left: 50px;"></label>
+                    <#button btnCss="danger" name="关闭" id="cancel" icon="fa-eraser" clickFun="CompanyInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/business/company/company_info.js"></script>
+@}

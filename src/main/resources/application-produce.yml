@@ -1,0 +1,27 @@
+##########################################################
+###################  开发环境的profile  ###################
+##########################################################
+spring:
+  profiles: produce
+  datasource:
+    url: jdbc:mysql://223.84.134.61:13306/ibdsr?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root123
+    filters: log4j,wall,mergeStat
+
+#多数据源
+guns:
+  muti-datasource:
+    default-dataSource-name: dataSourceGuns #默认的数据源名称
+    url: jdbc:mysql://172.16.0.200:3030/ibdsr?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root123
+   #fastdfs文件上传
+  fastDfs-url:
+    trackers: 223.84.134.61:22122
+    visit: http://223.84.134.61:10080/  #文件访问的URL包括端口信息
+
+#个人中心菜单id
+userinfo:
+  menu:
+    id: 168

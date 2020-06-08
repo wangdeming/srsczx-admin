@@ -1,0 +1,28 @@
+@layout("/common/_container.html"){
+<div class="container-fluid" style="padding: 0 !important;">
+	<div class="row">
+		<div class="col-sm-12">
+			@for(notice in noticeList){
+				<div class="alert alert-success alert-dismissable">
+					<button aria-hidden="true" class="close" data-dismiss="alert" type="button">×</button>
+					${notice.content}
+				</div>
+			@}
+		</div>
+	</div>
+</div>
+<script>
+	$(function () {
+		var ajax = new $ax(Feng.ctxPath + "/mgr/userSelf", function (data) {
+			if(data.code==200){
+				parent.window.$('#adminlogoName').text(data.data)
+			}else{
+				Feng.error("获取个人信息失败!" + data.message + "!");
+			}
+		}, function (data) {
+			Feng.error("获取个人信息失败!" + data.responseJSON.message + "!");
+		});
+		ajax.start();
+	})
+</script>
+@}

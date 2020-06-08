@@ -1,0 +1,88 @@
+.wrapper-content{
+    height: 99%;
+}
+.ibox,.ibox-content{
+    height: auto;
+}
+.row{
+    margin-bottom: 20px;
+}
+.form-control[disabled]{
+    background-color: #fff;
+    border: 0;
+    padding: 0;
+}
+.btn-group-m-t {
+    margin-top: 60px;
+}
+.btn-group-m-t .btn{
+    margin-right:20px;
+    padding: 8px 32px;
+}
+.form-control{
+    background: #F4F4F4;
+    border-radius: 4px!important;
+}
+.ibox-title{
+    color: #999;
+}
+.ibox-title a{
+    color: #999;
+}
+.ibox-title a:hover{
+    color: #19B467;
+}
+.ibox-title span{
+    color: #19B467;
+}
+.col-sm-5 span.num{
+    position: absolute;
+    right: 23px;
+    bottom: 7px;
+}
+.col-sm-5 span.num i{
+    font-style: normal;
+;
+}
+textarea{
+    resize: none;
+}
+#map_container{
+    width: 100%;
+    height: 420px;
+}
+.input-line .form-control{
+    width: 35%;
+    display: inline-block;
+}
+.input-line{
+    position: relative;
+}
+.input-line span{
+    position: absolute;
+    left: 76%;
+    top: -2px;
+    width: 36px;
+    height: 36px;
+    text-align: left;
+    cursor: move;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+.amap-marker-label {
+    border: 0;
+    background: none;
+    color: #19B467;
+}
+.has-error .note-editor{
+    border-color: #ed5565;
+}
+.w-e-toolbar{
+    flex-wrap: wrap;
+}

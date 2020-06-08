@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<style>
+    .btn-group-m-t {
+        margin-top: 40px;
+    }
+    .float-e-margins .btn{
+        margin-right: 24px;
+        padding: 6px 54px;
+    }
+</style>
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="changePwdForm">
+
+            <input id="id" type="hidden" value="">
+
+            <div class="col-sm-11 col-xs-11">
+                <#input id="oldPwd" name="*原密码:" type="password" placeholder="支持大小写字母、阿拉伯数字、符号或组合，6~30个字符"/>
+
+                <#input id="newPwd" name="*新密码:" type="password" placeholder="支持大小写字母、阿拉伯数字、符号或组合，6~30个字符"/>
+
+                <#input id="rePwd" name="*确认新密码:" type="password" placeholder="支持大小写字母、阿拉伯数字、符号或组合，6~30个字符"/>
+
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-12" style="text-align: center;">
+                    <button class="btn btn-info" onclick="UserChpwd.changePwd()" type="button">提交</button>
+                    <button class="btn btn-danger" onclick="UserChpwd.closePage ()" type="button">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/user/user_chpwd.js"></script>
+@}

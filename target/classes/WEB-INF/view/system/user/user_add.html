@@ -1,0 +1,40 @@
+@layout("/common/_container.html"){
+<style>
+	.btn-group-m-t {
+		margin-top: 40px;
+	}
+	.float-e-margins .btn{
+		margin-right: 24px;
+		padding: 6px 54px;
+	}
+</style>
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="userInfoForm">
+		
+			<input id="id" type="hidden" value="">
+
+			<div class="col-sm-11 col-xs-11">
+
+				<#input id="account" name="*登录账号:" placeholder="支持小写字母、阿拉伯数字或两者组合，4~20个字符" autocomplete="off"/>
+
+				<#input id="name" name="*用户姓名:" placeholder="2~5个中文汉字" autocomplete="off"/>
+
+				<#input id="password" type="password" name="登录密码:" placeholder="支持大小写字母、阿拉伯数字、符号或组合，6~30个字符，默认密码：111111" autocomplete="new-password"/>
+
+				<#input id="phone" name="联系电话:" autocomplete="off"/>
+
+				<#input id="email" name="电子邮箱:" autocomplete="off"/>
+			</div>
+
+			<div class="row btn-group-m-t">
+				<div class="col-sm-12" style="text-align: center;">
+					<button class="btn btn-info" onclick="UserInfoDlg.addSubmit()" type="button">提交</button>
+					<button class="btn btn-danger" onclick="UserInfoDlg.close()" type="button">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/system/user/user_info.js"></script>
+@}

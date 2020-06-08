@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ibdsr.web.modular.material.dao.NewsDao">
+    <select id="list" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+        id,
+        title,
+        news_type newsType,
+        image_news imageNews,
+        is_publish isPublish,
+        Date_format(show_time, '%Y-%m-%d %H:%i:%s') showTime,
+        Date_format(modified_time, '%Y-%m-%d %H:%i:%s') modifiedTime
+        FROM news_info
+        WHERE is_deleted = 0
+        <if test="condition != null and condition != ''">
+            AND title LIKE CONCAT('%', #{condition}, '%')
+        </if>
+        <if test="newsType != null">
+            AND news_type = #{newsType}
+        </if>
+        <if test="isPublish != null">
+            AND is_publish = #{isPublish}
+        </if>
+        <if test="imageNews != null">
+            AND image_news = #{imageNews}
+        </if>
+        <choose>
+            <when test="orderField != null and orderField !=''">
+                <choose>
+                    <when test="isAsc == true">
+                        <if test="orderField == 'showTime'">
+                            order by show_time ASC
+                        </if>
+                        <if test="orderField == 'modifiedTime'">
+                            order by modified_time ASC
+                        </if>
+                    </when>
+                    <otherwise>
+                        <if test="orderField == 'showTime'">
+                            order by show_time DESC
+                        </if>
+                        <if test="orderField == 'modifiedTime'">
+                            order by modified_time DESC
+                        </if>
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                order by show_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="indexGetList" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+            t.id,
+            t.title,
+            t.main_content mainContent,
+            Date_format(t.show_time, '%c-%e') showTime,
+            Date_format(t.show_time, '%Y-%m-%d %H:%i') publishTime,
+            t.cover_image coverImage,
+        t.extra_file extraFile
+        FROM
+        news_info t
+        WHERE
+        t.is_deleted = 0
+        AND
+        t.is_publish = 1
+        <if test="newsType != null">
+            AND t.news_type = #{newsType}
+        </if>
+        <if test="imageNews != null">
+            AND t.image_news = #{imageNews}
+        </if>
+        order by t.show_time desc
+    </select>
+
+    <select id="indexNewsDetail" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+            t.id,
+            t.title,
+            t.main_content mainContent,
+            Date_format(t.show_time, '%c-%e') showTime,
+            Date_format(t.show_time, '%Y-%m-%d %H:%i') publishTime,
+            t.cover_image coverImage,
+            t.extra_file extraFile,
+            t.news_type newsType
+        FROM
+            news_info t
+        WHERE
+            t.is_deleted = 0
+        AND
+            t.is_publish = 1
+        <if test="newsId != null">
+            and t.id = #{newsId}
+        </if>
+    </select>
+</mapper>

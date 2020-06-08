@@ -1,0 +1,48 @@
+@layout("/common/_container.html"){
+<style>
+	.row{
+		margin-bottom: 20px;
+	}
+	.btn-group-m-t {
+		margin-top: 40px;
+	}
+	.float-e-margins .btn{
+		margin-right: 24px;
+		padding: 6px 54px;
+	}
+</style>
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="userInfoForm">
+
+			<input id="id" type="hidden" value="${user.id}">
+			<input id="account" type="hidden" value="${user.account}">
+
+			<div class="col-sm-11 col-xs-11">
+				<div class="row">
+					<label class="col-sm-3 col-xs-3 control-label">*登录账号:</label>
+					<div class="col-sm-8 col-xs-8" style="padding-top: 7px;padding-left: 27px;">
+						<span style="padding-right: 20px;">${user.account}</span>
+						<a onclick="UserInfoDlg.resetPass(${user.id})">重置密码</a>
+					</div>
+				</div>
+
+				<#input id="name" name="*用户姓名:" placeholder="2~5个中文汉字" value="${user.name}"/>
+
+				<#input id="phone" name="联系电话:" value="${user.phone}"/>
+
+				<#input id="email" name="电子邮箱:" value="${user.email}"/>
+			</div>
+
+
+			<div class="row btn-group-m-t">
+				<div class="col-sm-8 col-sm-offset-3">
+					<button class="btn btn-info" onclick="UserInfoDlg.editSubmit()" type="button">提交</button>
+					<button class="btn btn-danger" onclick="UserInfoDlg.close()" type="button">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/system/user/user_info.js"></script>
+@}

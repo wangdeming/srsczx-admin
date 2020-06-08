@@ -1,0 +1,14 @@
+package ${service.packageName};
+
+/**
+ * @Description ${context.bizChName}Service
+ * @Version V1.0
+ * @CreateDate ${date.currentDateTime()}
+ *
+ * Date           Author               Description
+ * ------------------------------------------------------
+ * ${date.currentDate()}      xxx            类说明
+ */
+public interface I${context.bizEnBigName}Service {
+
+}

@@ -1,0 +1,167 @@
+@layout("/common/_container.html"){
+<link href="${ctxPath}/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+<style>
+    .row{
+        margin-bottom: 20px;
+    }
+    .w-e-toolbar {
+        flex-wrap: wrap;
+    }
+    .editorHeight{
+        height: auto;
+        min-height: 300px;
+        padding: 0;
+        overflow: hidden;
+    }
+    .w-e-text-container{
+        height: 400px !important;
+        /*min-height: 300px;*/
+    }
+    .up-btn{
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+    }
+    .up-btn input{
+        width: 100%;
+        height: 100%;
+        display: block;
+        z-index: 2;
+        opacity: 0;
+        left: 0;
+        top: 0;
+        position: absolute;
+    }
+    .div-input-sm {
+        width: 250px;
+        height: 140px;
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+    }
+    .div-input input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        display: block;
+        left: 0;
+        top: 0;
+        z-index: 2;
+    }
+    .div-input-sm .div-p {
+        margin-top: 20px;
+    }
+    .div-input p {
+        font-size: 14px;
+        color: #999999;
+        line-height: 20px;
+        margin: 0;
+    }
+    .div-img{
+        width: 250px;
+        height: 140px;
+        position: relative;
+        padding: 0;
+        overflow: hidden;
+    }
+    .div-img button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: none;
+        cursor: pointer;
+        border: 0;
+        font-size: 24px;
+        color: #333;
+        outline: none;
+        z-index: 3;
+    }
+    .div-img img{
+        width: 100%;
+        object-fit: contain;
+        height: 100%;
+    }
+    .radio input[type="radio"] + label+input{
+        display: none;
+    }
+    .radio input[type="radio"]:checked + label+input{
+        display: inline-block;
+    }
+    .form-horizontal .radio{
+        padding-top: 0px;
+    }
+</style>
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>编辑招商政策</h5>
+    </div>
+    <div class="ibox-content">
+        <div class="form-horizontal" id="NewsForm">
+
+            <input id="id" type="hidden" value="${policyContent.id}">
+            <input id="publishDate" type="hidden" value="${policy.publishDate}">
+            <input data-val='${policyContent.content}' id="mainFile" type="hidden">
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">*选择级别：</label>
+                <div class="col-sm-5 col-xs-8">
+                    <select data-value="${policy.level}" class="form-control" id="newsType" name="newsType">
+                        <option value="1">国家</option>
+                        <option value="2">省级</option>
+                        <option value="3">市级</option>
+                        <option value="4">区县级</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 col-xs-2 control-label">*政策标题：</label>
+                <div class="col-sm-5 col-xs-8">
+                    <input autocomplete="off" class="form-control" id="title" maxlength="80" name="title" placeholder="2-80字符" type="text" value="${policy.title}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 col-xs-2 control-label">*政策来源：</label>
+                <div class="col-sm-5 col-xs-8">
+                    <input autocomplete="off" class="form-control" id="from" maxlength="40" name="from" placeholder="2-40字符" type="text" value="${policy.source}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 col-xs-2 control-label">*发布时间：</label>
+                <div class="col-sm-5 col-xs-8">
+                    <input autocomplete="off" class="form-control" id="queryTime" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 col-xs-2 control-label">*正文：</label>
+                <div class="col-sm-8 col-xs-8">
+                    <div class="editorHeight form-control" id="editor" name="mainFile">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">附件：</label>
+                <div class="col-sm-5 col-xs-8">
+                    <span id="fileName">${policy.attachmentName}</span>
+                    <img id="closeImg" src="${ctxPath}/static/images/close.svg" style="width: 20px;height: 20px;display: none;cursor: pointer;">
+                    <div class="up-btn">
+                        <button class="btn"><i class="fa fa-upload"></i>  上传</button>
+                        <input accept=".doc,.docx,.xls,.xlsx,.pdf" class="btn btn-default" data-name="${policy.attachmentName}" data-src="${policy.attachment}" id="extraFile" max="10M" name="" placeholder="上传" readonly type="file" value="">
+                    </div>
+                    <span>格式说明：支持.doc、.xls、.pdf格式，大小不超过10M的文件</span>
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <label class="col-sm-1 col-xs-2 control-label"></label>
+                <div class="col-sm-5 col-xs-8">
+                    <#button btnCss="info" name="保存" id="ensure" icon="" clickFun="NewsInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="" clickFun="NewsInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/js/wangEditorReform.js"></script>
+<script src="${ctxPath}/static/modular/material/policy/policy_info.js"></script>
+<script src="${ctxPath}/static/modular/material/policy/policy_edit.js"></script>
+@}

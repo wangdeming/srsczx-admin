@@ -1,0 +1,152 @@
+@layout("/common/_container.html"){
+<style>
+
+</style>
+<link href="${ctxPath}/static/css/user.css" rel="stylesheet">
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5><a href="${ctxPath}/role">角色管理</a> > <span>角色详情</span></h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <input class="roleIdetail" id="id" type="hidden" value="${roleId}">
+                        <input id="status" type="hidden" value="${status}">
+                        <div class="mlr_8">
+                            <h3>基本信息 <span class="user_edit" onclick="Role.editRole(${roleId})"><i class="fa fa-edit"><span class="z_edit">编辑</span></i></span></h3>
+                        </div>
+                        <div class="row mlr_8" style="margin-left: 20px;">
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2 control-label">角色名称:</label>
+                                <div class="col-sm-5 col-xs-8 spacing">
+                                    <span id="name" style="padding-right: 50px;">${roleName}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2 control-label">角色说明:</label>
+                                <div class="col-sm-5 col-xs-8 spacing">
+                                    <span id="tips" style="padding-right: 50px;">${tips}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2 control-label">角色状态:</label>
+                                <div class="col-sm-5 col-xs-8 spacing">
+                                    <span style="padding-right: 50px;">${statusName}</span>
+<!--                                    <span class="btn btn-c isOpen" onclick="Role.openRole(${roleId},2)">启用</span>-->
+<!--                                    <span class="btn btn-c Open" onclick="Role.freezeRole(${roleId},2)">禁用</span>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mlr_8">
+                            <h3>功能权限 <span class="user_edit" onclick="Role.authorityMgr(${roleId})"><i class="fa fa-edit"></i><span class="z_edit">编辑</span></span></h3>
+                        </div>
+                        <div class="row mlr_8">
+                            <div class=" col-sm-8 " style=" margin-left: 1.5%;" >
+                                <ul class="ztree" id="zTree"></ul>
+                            </div>
+                        </div>
+                        <div class="row mlr_8">
+                            <h3>已授权用户 <span class="user_edit" onclick="Role.authorizeduser(${roleId})"><i class="fa fa-edit"></i><span class="z_edit">编辑</span></span></h3>
+                        </div>
+                        <div class="row mlr_8">
+                            <div class="col-sm-8 conter" style="height: 200px;overflow-y: scroll;" >
+                                <table>
+                                    <thead class="tablelist">
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row mlr_8">
+                            <div class="col-sm-8 " >
+                                <button class="btn btn-danger" onclick="Role.close()" style="padding: 6px 54px;" type="button">返回</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/role/role.js"></script>
+<script src="${ctxPath}/static/modular/system/role/role_info.js"></script>
+<script src="${ctxPath}/static/modular/system/user/userinfo.js"></script>
+<script>
+
+    // 查询角色详情
+    roledetail();
+    function roledetail() {
+        if ($("#status").val()==2){
+            $(".isOpen").show();
+            $(".Open").hide();
+        } else {
+            $(".Open").show();
+            $(".isOpen").hide();
+        }
+        if ($("#id").val()==1) {
+            $(".Open").hide();
+            $(".isOpen").hide();
+            $(".user_edit").hide();
+        }
+    };
+    initZtree();
+    function initZtree() {
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "ps", "N": "ps" }
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+        var roleId =$("#id").val();
+
+        var ztree = new $ZTree("zTree", "/menu/menuTreeListByRoleId/" + roleId);
+        ztree.setSettings(setting);
+        ztree.init();
+    }
+    //授权用户列表
+    listauthorityUser();
+    function listauthorityUser() {
+        var roleId = $(".roleIdetail").val();
+        var ajax = new $ax(Feng.ctxPath + "/role/authorizedUsers", function (data) {
+            var result = ''
+            var elem = data
+            console.log(elem.length);
+            var html = '<tr>\n' +
+                '                                    <th>序号</th>\n' +
+                '                                    <th>账号</th>\n' +
+                '                                    <th>姓名</th>\n' +
+                '                                    <th>手机号</th>\n' +
+                '                                    <th>电子邮箱</th>\n' +
+                '                                    <th>状态</th>\n' +
+                '                                </tr>'
+            if(elem.length!=0){
+                $.each(elem,function (index,elem) {
+                    var account = elem.account;
+                    var no = elem.no;
+                    var name = elem.name;
+                    var phone = elem.phone;
+                    var email = elem.email;
+                    var statusName = elem.statusName;
+                    result +=' <tr><td>'+no+'</td><td>'+account+'</td><td>'+name+'</td><td>'+phone+'</td><td>'+email+'</td><td>'+statusName+'</td></tr>' ;
+                })
+                $(".tablelist").empty().append(html+result);
+
+            }else {
+
+                var result1 =' <tr><td>无</td><td>无</td><td>无</td><td>无</td><td>无</td><td>无</td></tr>' ;
+                $(".tablelist").empty().append(html+result1);
+
+            }
+        }, function (data) {});
+        ajax.type="get";
+        ajax.set("roleId", roleId);
+        ajax.start();
+    }
+</script>
+@}

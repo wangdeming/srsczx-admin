@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ibdsr.web.modular.system.dao.UserMgrDao">
+
+	<sql id="Base_Column_List">
+		id, account, name, email, avatar,
+		phone, status,
+		createtime, version
+	</sql>
+
+	<sql id="Base_Column_List_With_Pwd">
+		id, account, name,password, email, avatar,
+		phone, salt, status,
+		createtime, version
+	</sql>
+
+	<update id="setStatus">
+		update user set status = #{status} where id =
+		#{userId}
+	</update>
+
+	<select id="getByAccount" resultType="user">
+		select
+		<include refid="Base_Column_List_With_Pwd" />
+		from user where binary  account = #{account} and status != 3
+	</select>
+
+	<select id="userDetail" resultType="com.alibaba.fastjson.JSONObject">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where id = #{userId}
+	</select>
+
+    <select id="list" resultType="com.alibaba.fastjson.JSONObject">
+        select
+        <include refid="Base_Column_List" />
+        from user
+        where status != 3
+        <if test="id != 1">
+            and id != 1
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and (phone like CONCAT('%',#{keyword},'%')
+            or account like CONCAT('%',#{keyword},'%')
+            or name like CONCAT('%',#{keyword},'%')
+			or email like CONCAT('%',#{keyword},'%'))
+        </if>
+        order by createtime desc
+    </select>
+
+	<select id="getAuthorizedUsersByRoleId" resultType="com.alibaba.fastjson.JSONObject">
+		SELECT
+		    (@i:=@i+1) AS no,
+			u.account,
+			u.name,
+			u.phone,
+			u.email,
+			u.status
+		FROM
+			user u
+		LEFT JOIN role_user ru ON u.id = ru.user_id
+		LEFT JOIN role r ON r.id = ru.role_id,
+		(SELECT @i:=0) AS it
+		WHERE
+			r.id = #{roleId}
+		AND u.status != 3
+	</select>
+
+	<select id="getUnauthorizedUsersByRoleId" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+            id,
+            account,
+            NAME,
+            (
+                CASE
+                WHEN (
+                    (
+                        SELECT
+                            count(*)
+                        FROM
+                            role_user AS rur
+                        WHERE
+                            rur.role_id = #{roleId}
+                        AND rur.user_id = u.id
+                    ) > 0
+                ) THEN
+                    'true'
+                ELSE
+                    'false'
+                END
+            ) "checked"
+        FROM
+            user AS u
+        WHERE
+            u.status = 1
+        <if test="userId != 1">
+            AND u.id != 1
+        </if>
+        AND u.id NOT IN (
+            SELECT
+                rur.user_id
+            FROM
+                role_user AS rur
+            WHERE
+                role_id != #{roleId}
+            AND rur.role_id IN (
+                SELECT
+                    id
+                FROM
+                    role
+            )
+        )
+	</select>
+</mapper>

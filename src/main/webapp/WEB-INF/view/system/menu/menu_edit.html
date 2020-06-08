@@ -1,0 +1,51 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="menuInfoForm">
+
+            <input id="id" type="hidden" value="${menu.id}">
+            <input id="ismenuValue" type="hidden" value="${menu.ismenu}">
+            <input id="isAdminValue" type="hidden" value="${menu.isAdmin}">
+            <div class="row">
+                <div class="col-sm-9">
+                    <#input id="name" name="名称" value="${menu.name}" underline="false" />
+                    <#input id="code" name="菜单编号" value="${menu.code}" underline="false" />
+                    <#input id="pcodeName" name="父级编号" value="${menu.pcodeName}" underline="false"
+                            hidden="pcode" readonly="readonly" hiddenValue="${menu.pcode}"
+                            clickFun="MenuInfoDlg.showMenuSelectTree(); return false;"
+                            style="background-color: #ffffff !important;"
+                            selectFlag="true" selectId="pcodeTreeDiv" selectTreeId="pcodeTree" selectStyle="width:244px !important;"/>
+                    <#select id="ismenu" name="是否是菜单">
+                        <option value="1">是</option>
+                        <option value="0">不是</option>
+                    </#select>
+
+                </div>
+                <div class="col-sm-9">
+                    <#input id="url" name="请求地址" value="${menu.url}" underline="false" />
+                    <#input id="num" name="排序" value="${menu.num}" underline="false" />
+                    <#input id="icon" name="图标" underline="false" value="${menu.icon}"/>
+                    <#select id="isAdmin" name="是否管理员专用">
+                        <option value="1">是</option>
+                        <option value="0">不是</option>
+                    </#select>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label class="col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <#button btnCss="info" name="提交" id="ensure" icon="" clickFun="MenuInfoDlg.editSubmit()"/>
+                            <#button btnCss="danger" name="取消" id="cancel" icon="" clickFun="MenuInfoDlg.close()"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/menu/menu_info.js"></script>
+@}

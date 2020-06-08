@@ -1,0 +1,82 @@
+@layout("/common/_container.html"){
+<style>
+    #ImgList li{
+        width: 384px;
+        height: 64px;
+        list-style: none;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    #ImgList li img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    #ImgList li button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: none;
+        cursor: pointer;
+        border: 0;
+        font-size: 24px;
+        color: #333;
+        outline: none;
+        z-index: 3;
+        line-height: 0;
+    }
+    .add_div{
+        width: 384px;
+        height: 64px;
+        border: 1px solid #ccc;
+        position: relative;
+        text-align: center;
+        line-height: 80px;
+        margin-bottom: 40px;
+        margin-left: 40px;
+    }
+    .add_div input{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        opacity: 0;
+    }
+    .btn_div,.editBtn_div{
+        margin-left: 40px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>轮播图</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <p class="tips" style="display: none">长宽尺寸为1200*200px，每张图片的大小不超过1M</p>
+                        <ul id="ImgList">
+                        </ul>
+                        <div class="add_div" style="display: none">
+                            <i class="fa fa-plus fa-3x"></i>
+                            <input type="file" id="images">
+                        </div>
+                        <div class="btn_div">
+                            <button class="btn btn-primary" onclick="Banner.Edit()" class="edit_btn">编辑</button>
+                        </div>
+                        <div class="editBtn_div" style="display: none;">
+                            <button class="btn btn-primary" onclick="Banner.Save()" class="save_btn">保存</button>
+                            <button class="btn btn-danger" onclick="Banner.Cancel()" class="cancel_btn">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/js/jquery-ui-1.10.4.min.js"></script>
+<script src="${ctxPath}/static/modular/material/banner/banner.js"></script>
+@}

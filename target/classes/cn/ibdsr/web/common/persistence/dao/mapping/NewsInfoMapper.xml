@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ibdsr.web.common.persistence.dao.NewsInfoMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="cn.ibdsr.web.common.persistence.model.NewsInfo">
+		<id column="id" property="id"/>
+		<result column="title" property="title"/>
+		<result column="news_type" property="newsType"/>
+		<result column="image_news" property="imageNews"/>
+		<result column="main_content" property="mainContent"/>
+		<result column="extra_file" property="extraFile"/>
+		<result column="file_name" property="fileName"/>
+		<result column="show_time" property="showTime"/>
+		<result column="cover_image" property="coverImage"/>
+		<result column="is_publish" property="isPublish"/>
+		<result column="created_user" property="createdUser"/>
+		<result column="created_time" property="createdTime"/>
+		<result column="modified_user" property="modifiedUser"/>
+		<result column="modified_time" property="modifiedTime"/>
+		<result column="is_deleted" property="isDeleted" />
+	</resultMap>
+
+</mapper>

@@ -1,0 +1,102 @@
+@layout("/common/_container.html"){
+<script>
+    function initZtree() {
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "ps", "N": "ps" }
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+        var roleId =$("#id").val();
+
+        var ztree = new $ZTree("zTree", "/menu/menuTreeListByRoleId/" + roleId);
+        ztree.setSettings(setting);
+        ztree.init();
+    }
+    function setDisabledNode(){
+        var treeObj = $.fn.zTree.getZTreeObj("zTree");
+        var nodes = treeObj.transformToArray(treeObj.getNodes());
+        for (var i=0, l=nodes.length; i<l; i++) {
+            treeObj.setChkDisabled(nodes[i], true);
+        }
+    }
+    $(function(e){
+        initZtree();
+        setDisabledNode();
+    })
+</script>
+<style>
+    .ibox,.ibox-content{
+        height: 100%;
+    }
+    .row{
+        margin-bottom: 20px;
+    }
+    .ibox-title{
+        color: #999;
+    }
+    .ibox-title a{
+        color: #999;
+    }
+    .ibox-title a:hover{
+        color: #145BAC;
+    }
+    .ibox-title span{
+        color: #145BAC;
+    }
+    .spacing{
+        padding: 7px 0 0 27px;
+    }
+</style>
+<div class="ibox-title">
+    <h5>个人中心<span class="fa fa-pencil-square-o" onclick="MgrUser.openCenterUser(${user.id})" style="font-size: 16px;margin-left: 12px;cursor: pointer;"></span></h5>
+</div>
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" style="padding-top: 36px;">
+
+            <input id="id" type="hidden" value="${roleId}">
+
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">登录账号:</label>
+                <div class="col-sm-5 col-xs-8 spacing">
+                    <span id="account" style="padding-right: 50px;">${user.account}</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">用户姓名:</label>
+                <div class="col-sm-5 col-xs-8 spacing">
+                    <span id="name" style="padding-right: 50px;">${user.name}</span>
+                    <a onclick="UserInfoDlg.editPass(${user.id})">修改密码</a>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">联系电话:</label>
+                <div class="col-sm-5 col-xs-8 spacing">
+                    <span id="phone">${user.phone}</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">电子邮箱:</label>
+                <div class="col-sm-5 col-xs-8 spacing">
+                    <span id="email">${user.email}</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-1 col-xs-2 control-label">已授权限:</label>
+                <div class="col-sm-8 conter" >
+                    <ul class="ztree" id="zTree"></ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/user/user.js"></script>
+<script src="${ctxPath}/static/modular/system/user/user_info.js"></script>
+@}

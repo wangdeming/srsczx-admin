@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<style>
+	.btn-group-m-t {
+		margin-top: 40px;
+	}
+	.float-e-margins .btn{
+		margin-right: 24px;
+		padding: 6px 54px;
+	}
+</style>
+<div class="ibox float-e-margins">
+	<div class="ibox-content">
+		<div class="form-horizontal" id="roleInfoForm">
+		
+			<input id="id" type="hidden" value="">
+
+			<div class="col-sm-11 col-xs-11">
+				<#input id="name" name="*角色名称:" placeholder="1~8个汉字，需在所属系统中唯一"/>
+				<#rc_textareay id="tips" name="*角色说明:" maxlength="50" direction="vertical" placeholder="50个字以内"/>
+			</div>
+
+			<div class="row btn-group-m-t">
+				<div class="col-sm-12" style="text-align: center;">
+					<button class="btn btn-info" onclick="RolInfoDlg.addSubmit()" type="button">保存</button>
+					<button class="btn btn-danger" onclick="RolInfoDlg.close()" type="button">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="${ctxPath}/static/modular/system/role/role_info.js"></script>
+@}
